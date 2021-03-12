@@ -1,6 +1,7 @@
 {
   "autosave": true,
   "background": true,
+  "colors": true,
   "cpu": {
     "enabled": true,
     "huge-pages": false,
