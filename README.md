@@ -49,9 +49,4 @@ Step 7 - Run the generated run script
 
 Step 8 - Profit
 
-Step 9 - Donate
-```
-
-43cKyCmpH6zi8x2vJDakvaaZZU9j929o5Y2VvhbTX9cGHQNtGAEzrRw9A6vJDM4KSi7QSThqQNcKog73hckRVGBsEjmkdjf
-
-```
+Step 9 - Donate - 43cKyCmpH6zi8x2vJDakvaaZZU9j929o5Y2VvhbTX9cGHQNtGAEzrRw9A6vJDM4KSi7QSThqQNcKog73hckRVGBsEjmkdjf
