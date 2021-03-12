@@ -7,12 +7,14 @@ rm -rf "$HOME/xmrig" && mkdir -p "$HOME/xmrig" && cd "$HOME/xmrig"
 
 Step 2 - Get install script
 ```
+rm -f "install.sh"
 wget "https://github.com/michaelmannelson/xmrig/raw/main/install.sh"
 chmod +x "install.sh"
 ```
 
 Step 3 - Pick desired processing intensity level from least to greatest. 0 = Idle, 2 = Normal, 5 = Dedicated
 ```
+rm -f "config.json"
 
 wget "https://github.com/michaelmannelson/xmrig/raw/main/config.0.json" -O "config.json"
 
