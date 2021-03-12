@@ -66,8 +66,9 @@ if [ "`uname -o`" == "Android" ]; then # https://github.com/cmxhost/xmrig/blob/m
     apt-get install openssl -y
     apt-get install jq -y
     #https://www.reddit.com/r/termux/comments/i27szk/how_do_i_crontab_on_termux/
-    apt-get install cronie -y               
-    apt-get termux-services -y
+    apt-get install cronie -y
+    apt-get install runit -y
+    apt-get install termux-services -y
 else # https://xmrig.com/docs/miner/build/ubuntu
     sudo apt-get update && apt-get upgrade -y
     sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
@@ -135,10 +136,27 @@ file="$HOME/xmrig/run.sh"
 if [ ! -f $file ]; then install -Dv /dev/null "$file"; fi
 truncate -s 0 $file
 echo -e "#!/bin/bash" | tee -a $file &> /dev/null
+echo -e "declare -r cwf=\${0##*/}" | tee -a $file &> /dev/null
+echo -e "declare -r date=\$(date -u +\"%Y%m%d%H%M%S%z\")" | tee -a $file &> /dev/null
+echo -e "declare -r log=\"\$cwf.log\"" | tee -a $file &> /dev/null
+echo -e "declare -r pre=\"\$date - \$cwf -\"" | tee -a $file &> /dev/null
 echo -e "if [ -z \$(pidof -x xmrig) ]; then" | tee -a $file &> /dev/null
-echo -e "  \"$HOME/xmrig/xmrig/build/xmrig\" --config \"$argConfig\"" | tee -a $file &> /dev/null
+echo -e "  \"\$HOME/xmrig/xmrig/build/xmrig\" --config \"$argConfig\"" | tee -a $file &> /dev/null
+echo -e "  \"\$pre xmrig started\" >> \"$log\""
+echo -e "else"
+echo -e "  echo \"\$pre xmrig running\""
 echo -e "fi" | tee -a $file &> /dev/null
 echo -e
+
+if [ -z $(pidof -x xmrig) ]; then
+  "/home/michael/xmrig/xmrig/build/xmrig" --config "/home/michael/xmrig/config.json"
+  
+else
+  echo "$pre xmrig running"
+fi
+
+
+
 chmod +x "$file"
 
 crontab -l > crontab_new
@@ -149,9 +167,7 @@ rm crontab_new
 
 if [ "`uname -o`" == "Android" ]; then
     echo "Termux must be restarted so manually re-execute this command when you return..."
-    sv enable crond
-    exit
+    echo "sv enable crond"
 else
     /etc/init.d/cron restart
 fi
-
