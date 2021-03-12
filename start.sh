@@ -8,7 +8,7 @@ declare -r pre="$date - $cwf - xmrig -"
 if [ -z $(pidof -x xmrig) ]; then
   crontab -l > crontab_new
   grep -v "xmrig" crontab_new > crontab_new_tmp && mv crontab_new_tmp crontab_new
-  echo "*/5 * * * * \"$file\"" >> crontab_new
+  echo "*/5 * * * * \"$HOME/xmrig/start.sh\"" >> crontab_new
   crontab crontab_new
   rm crontab_new
   echo "$pre cron added" >> "$log"
