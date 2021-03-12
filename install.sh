@@ -113,12 +113,12 @@ else
 fi
 
 declare cmakeTarget="" 
-if   [ "`uname -m`" == "armv7l" ]; then cmaketarget="-DARM_TARGET=7"; cmakeHwloc="-DWITH_HWLOC=OFF";
-elif [ "`uname -m`" == "armv8l" ]; then cmaketarget="-DARM_TARGET=8"; cmakeHwloc="-DWITH_HWLOC=OFF";
+if   [ "`uname -m`" == "armv7l" ]; then cmaketarget="-DARM_TARGET=7";
+elif [ "`uname -m`" == "armv8l" ]; then cmaketarget="-DARM_TARGET=8";
 fi
 
-#declare cmakeHwloc=""
-#if [ "`uname -o`" == "Android" ]; then cmakeHwloc="-DWITH_HWLOC=OFF"; fi
+declare cmakeHwloc=""
+if [ "`uname -o`" == "Android" ]; then cmakeHwloc="-DWITH_HWLOC=OFF"; fi
 
 if [ -d "$HOME/xmrig/xmrig" ]; then rm -rf "$HOME/xmrig/xmrig"; fi
 cd "$HOME/xmrig" && git clone https://github.com/xmrig/xmrig.git
