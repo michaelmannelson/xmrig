@@ -83,8 +83,8 @@ while [ "$argPass" == "null" ] || [ "$argPass" == "" ] || [ "$argPass" == "TODO"
 `jq ".pools[].pass = \"$argPass\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
 
 if [ "`uname -o`" == "Android" ]; then 
-    `jq ".cuda.enabled = \"false\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
-    `jq ".opencl = \"false\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
+    `jq ".cuda.enabled = false" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
+    `jq ".opencl = false" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
 fi
 
 if [ ! -d "$HOME/xmrig" ]; then mkdir -p "$HOME/xmrig"; fi
