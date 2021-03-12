@@ -7,7 +7,7 @@
     "priority": 5,
     "yield": true,
     "max-threads-hint": 100,
-    "asm": true,
+    "asm": true
   },
   "cuda": {
     "enabled": true,
@@ -15,7 +15,7 @@
     "nvml": true,
     "cn/0": false,
     "cn-lite/0": false
-  },  
+  },
   "donate-level": 0,
   "opencl": false,
   "pause-on-battery": true,
@@ -28,10 +28,10 @@
       "keepalive": true,
       "tls": true
     }
-  ]  
+  ],
   "randomx": {
     "mode": "auto",
-    "1gb-pages": true,
-  },  
-  "title": true,
+    "1gb-pages": true
+  },
+  "title": true
 }
