@@ -130,32 +130,10 @@ mkdir -p "$HOME/xmrig/xmrig/build" && cd "$HOME/xmrig/xmrig/build"
 sed -i 's/constexpr const int kDefaultDonateLevel = .*;/constexpr const int kDefaultDonateLevel = 0;/' "$HOME/xmrig/xmrig/src/donate.h"
 sed -i 's/constexpr const int kMinimumDonateLevel = .*;/constexpr const int kMinimumDonateLevel = 0;/' "$HOME/xmrig/xmrig/src/donate.h"
 cmake .. $cmakeTarget $cmakeHwloc
-#make -j$(nproc)
+make -j$(nproc)
 
-file="$HOME/xmrig/run.sh"
-if [ ! -f $file ]; then install -Dv /dev/null "$file"; fi
-truncate -s 0 $file
-echo -e "#!/bin/bash" | tee -a "$file" &> /dev/null
-echo -e "declare -r cwf=\${0##*/}" | tee -a "$file" &> /dev/null
-echo -e "declare -r date=\$(date -u +\"%Y%m%d%H%M%S%z\")" | tee -a "$file" &> /dev/null
-echo -e "declare -r log=\"\$cwf.log\"" | tee -a "$file" &> /dev/null
-echo -e "declare -r pre=\"\$date - \$cwf - xmrig\"" | tee -a "$file" &> /dev/null
-echo -e "if [ -z \$(pidof -x xmrig) ]; then" | tee -a "$file" &> /dev/null
-echo -e "  \"\$HOME/xmrig/xmrig/build/xmrig\" --config \"$argConfig\"" | tee -a "$file" &> /dev/null
-echo -e "  echo \"\$pre started\" >> \"\$log\"" | tee -a "$file" &> /dev/null
-echo -e "else" | tee -a "$file" &> /dev/null
-echo -e "  echo \"\$pre running\" >> \"\$log\"" | tee -a "$file" &> /dev/null
-echo -e "fi" | tee -a "$file" &> /dev/null
+rm -f "start.sh" && wget "https://github.com/michaelmannelson/xmrig/raw/main/start.sh" && chmod +x "start.sh"
+rm -f "stop.sh" && wget "https://github.com/michaelmannelson/xmrig/raw/main/stop.sh" && chmod +x "stop.sh"
 
-crontab -l > crontab_new
-grep -v "xmrig" crontab_new > crontab_new_tmp && mv crontab_new_tmp crontab_new
-echo "*/5 * * * * \"$file\"" >> crontab_new
-crontab crontab_new
-rm crontab_new
+./start.sh
 
-if [ "`uname -o`" == "Android" ]; then
-    echo "Termux must be restarted so manually re-execute this command when you return..."
-    echo "sv enable crond"
-else
-    /etc/init.d/cron restart
-fi
