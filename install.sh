@@ -100,8 +100,8 @@ if [ "`uname -o`" == "Android" ]; then cmakeHwloc="-DWITH_HWLOC=OFF"; fi
 if [ -d "$HOME/xmrig/xmrig" ]; then rm -rf "$HOME/xmrig/xmrig"; fi
 cd "$HOME/xmrig" && git clone https://github.com/xmrig/xmrig.git
 mkdir -p "$HOME/xmrig/xmrig/build" && cd "$HOME/xmrig/xmrig/build"
-sed -i 's/constexpr const int kDefaultDonateLevel = .*;/constexpr const int kDefaultDonateLevel = 0;/' "$HOME/xmrig/src/donate.h"
-sed -i 's/constexpr const int kMinimumDonateLevel = .*;/constexpr const int kMinimumDonateLevel = 0;/' "$HOME/xmrig/src/donate.h"
+sed -i 's/constexpr const int kDefaultDonateLevel = .*;/constexpr const int kDefaultDonateLevel = 0;/' "$HOME/xmrig/xmrig/src/donate.h"
+sed -i 's/constexpr const int kMinimumDonateLevel = .*;/constexpr const int kMinimumDonateLevel = 0;/' "$HOME/xmrig/xmrig/src/donate.h"
 cmake .. $cmakeTarget $cmakeHwloc
 make -j$(nproc)
 
