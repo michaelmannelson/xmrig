@@ -82,11 +82,6 @@ if [ "$argPass" == "" ]; then argPass=`jq ".pools[].pass" "$argConfig" | sed -e 
 while [ "$argPass" == "null" ] || [ "$argPass" == "" ] || [ "$argPass" == "TODO" ]; do read -p "pass: " argPass; done
 `jq ".pools[].pass = \"$argPass\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
 
-if [ "`uname -o`" == "Android" ]; then 
-    `jq ".cuda.enabled = false" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
-    `jq ".opencl = false" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
-fi
-
 if [ ! -d "$HOME/xmrig" ]; then mkdir -p "$HOME/xmrig"; fi
 
 if [ "`jq ".cuda.enabled" "$argConfig"`" == "true" ] && [ "`uname -o`" != "Android" ] && [ "`lspci | grep -i nvidia`" != "" ]; then
@@ -106,6 +101,14 @@ if [ "`jq ".cuda.enabled" "$argConfig"`" == "true" ] && [ "`uname -o`" != "Andro
     make -j$(nproc)
     
     `jq ".cuda.loader = \"$HOME/xmrig/xmrig-cuda/build/libxmrig-cuda.so\"" "$argConfig" > "$argConfig.tmp"` && mv "$argConfig.tmp" "$argConfig"
+else
+    `jq ".cuda.enabled = false" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
+fi
+
+if [ "`jq ".opencl" "$argConfig"`" == "true" ] && [ "`uname -o`" != "Android" ] && [ "`lspci | grep -i amd`" != "" ]; then
+    # TODO: Is there anything to put here?
+else
+    `jq ".opencl = false" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
 fi
 
 declare cmakeTarget="" 
