@@ -130,7 +130,7 @@ mkdir -p "$HOME/xmrig/xmrig/build" && cd "$HOME/xmrig/xmrig/build"
 sed -i 's/constexpr const int kDefaultDonateLevel = .*;/constexpr const int kDefaultDonateLevel = 0;/' "$HOME/xmrig/xmrig/src/donate.h"
 sed -i 's/constexpr const int kMinimumDonateLevel = .*;/constexpr const int kMinimumDonateLevel = 0;/' "$HOME/xmrig/xmrig/src/donate.h"
 cmake .. $cmakeTarget $cmakeHwloc
-make -j$(nproc)
+#make -j$(nproc)
 
 file="$HOME/xmrig/run.sh"
 if [ ! -f $file ]; then install -Dv /dev/null "$file"; fi
@@ -142,10 +142,10 @@ echo -e "declare -r log=\"\$cwf.log\"" | tee -a $file &> /dev/null
 echo -e "declare -r pre=\"\$date - \$cwf -\"" | tee -a $file &> /dev/null
 echo -e "if [ -z \$(pidof -x xmrig) ]; then" | tee -a $file &> /dev/null
 echo -e "  \"\$HOME/xmrig/xmrig/build/xmrig\" --config \"$argConfig\"" | tee -a $file &> /dev/null
-echo -e "  echo \"\$pre xmrig started\" >> \"\$log\"" | tee -a $file &> /dev/null
-echo -e "else" | tee -a $file &> /dev/null
-echo -e "  echo \"\$pre xmrig running\" >> \"\$log\"" | tee -a $file &> /dev/null
-echo -e "fi" | tee -a $file &> /dev/null
+#echo -e "  echo \"\$pre xmrig started\" >> \"\$log\"" | tee -a $file &> /dev/null
+echo -e "echo else" | tee -a $file &> /dev/null
+#echo -e "  echo \"\$pre xmrig running\" >> \"\$log\"" | tee -a $file &> /dev/null
+#echo -e "fi" | tee -a $file &> /dev/null
 
 crontab -l > crontab_new
 grep -v "xmrig" crontab_new > crontab_new_tmp && mv crontab_new_tmp crontab_new
