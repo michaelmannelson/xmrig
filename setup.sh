@@ -22,4 +22,5 @@ echo "sudo \"$HOME/xmrig/install.sh\" -o \"$url\" -u \"$user\" -p \"`uname -o`.`
 echo
 echo
 echo
+rm setup.sh
 
