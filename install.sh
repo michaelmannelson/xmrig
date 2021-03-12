@@ -132,8 +132,9 @@ sed -i 's/constexpr const int kMinimumDonateLevel = .*;/constexpr const int kMin
 cmake .. $cmakeTarget $cmakeHwloc
 make -j$(nproc)
 
-rm -f "start.sh" && wget "https://github.com/michaelmannelson/xmrig/raw/main/start.sh" && chmod +x "start.sh"
+cd "$HOME/xmrig"
 rm -f "stop.sh" && wget "https://github.com/michaelmannelson/xmrig/raw/main/stop.sh" && chmod +x "stop.sh"
+rm -f "start.sh" && wget "https://github.com/michaelmannelson/xmrig/raw/main/start.sh" && chmod +x "start.sh"
 
 ./start.sh
 
