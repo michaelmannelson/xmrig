@@ -106,7 +106,7 @@ else
 fi
 
 if [ "`jq ".opencl" "$argConfig"`" == "true" ] && [ "`uname -o`" != "Android" ] && [ "`lspci | grep -i amd`" != "" ]; then
-    # TODO: Is there anything to put here?
+    echo "OpenCl is good"
 else
     `jq ".opencl = false" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
 fi
