@@ -7,7 +7,7 @@
     "huge-pages": true,
     "priority": 0,
     "yield": true,
-    "max-threads-hint": 90
+    "max-threads-hint": 60
   },
   "cuda": {
     "enabled": true,
@@ -18,7 +18,7 @@
   },
   "donate-level": 0,
   "opencl": true,
-  "pause-on-battery": false,
+  "pause-on-battery": true,
   "pause-on-active": false,
   "pools": [
     {

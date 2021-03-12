@@ -5,9 +5,9 @@
   "cpu": {
     "enabled": true,
     "huge-pages": true,
-    "priority": 2,
+    "priority": 0,
     "yield": true,
-    "max-threads-hint": 50
+    "max-threads-hint": 45
   },
   "cuda": {
     "enabled": true,

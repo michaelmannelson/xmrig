@@ -7,7 +7,7 @@
     "huge-pages": false,
     "priority": 0,
     "yield": true,
-    "max-threads-hint": 25
+    "max-threads-hint": 15
   },
   "cuda": {
     "enabled": true,
@@ -35,3 +35,4 @@
   },
   "title": true
 }
+

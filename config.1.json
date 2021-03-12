@@ -1,13 +1,13 @@
 {
   "autosave": true,
-  "background": false,
+  "background": true,
   "colors": true,
   "cpu": {
     "enabled": true,
-    "huge-pages": true,
+    "huge-pages": false,
     "priority": 0,
     "yield": true,
-    "max-threads-hint": 90
+    "max-threads-hint": 30
   },
   "cuda": {
     "enabled": true,
@@ -18,8 +18,8 @@
   },
   "donate-level": 0,
   "opencl": true,
-  "pause-on-battery": false,
-  "pause-on-active": false,
+  "pause-on-battery": true,
+  "pause-on-active": true,
   "pools": [
     {
       "url": "TODO",
@@ -31,7 +31,7 @@
   ],
   "randomx": {
     "mode": "auto",
-    "1gb-pages": true
+    "1gb-pages": false
   },
   "title": true
 }
