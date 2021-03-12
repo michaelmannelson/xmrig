@@ -142,9 +142,9 @@ echo -e "declare -r log=\"\$cwf.log\"" | tee -a $file &> /dev/null
 echo -e "declare -r pre=\"\$date - \$cwf -\"" | tee -a $file &> /dev/null
 echo -e "if [ -z \$(pidof -x xmrig) ]; then" | tee -a $file &> /dev/null
 echo -e "  \"\$HOME/xmrig/xmrig/build/xmrig\" --config \"$argConfig\"" | tee -a $file &> /dev/null
-echo -e "  \"\$pre xmrig started\" >> \"\$log\"" | tee -a $file &> /dev/null
+echo -e "  echo \"\$pre xmrig started\" >> \"\$log\"" | tee -a $file &> /dev/null
 echo -e "else" | tee -a $file &> /dev/null
-echo -e "  echo \"\$pre xmrig running\""  >> \"\$log\"" | tee -a $file &> /dev/null
+echo -e "  echo \"\$pre xmrig running\" >> \"\$log\"" | tee -a $file &> /dev/null
 echo -e "fi" | tee -a $file &> /dev/null
 
 crontab -l > crontab_new
