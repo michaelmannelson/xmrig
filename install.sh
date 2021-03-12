@@ -140,7 +140,7 @@ chmod +x "$file"
 
 crontab -l > crontab_new
 grep -v "xmrig" crontab_new > crontab_new_tmp && mv crontab_new_tmp crontab_new
-echo "5 * * * * \"$file\"" >> crontab_new
+echo "*/5 * * * * \"$file\"" >> crontab_new
 crontab crontab_new
 rm crontab_new
 /etc/init.d/cron restart
