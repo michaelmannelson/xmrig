@@ -101,7 +101,7 @@ if [ ! -f $file ]; then install -Dv /dev/null "$file"; fi
 truncate -s 0 $file
 echo -e "#!/bin/bash" | tee -a $file &> /dev/null
 echo -e "if [ -z $(pidof -x xmrig) ]; then" | tee -a $file &> /dev/null
-echo -e "  $HOME/xmrig/build/xmrig --config \"$confg\"" | tee -a $file &> /dev/null
+echo -e "  $HOME/xmrig/build/xmrig --config \"$argConfig\"" | tee -a $file &> /dev/null
 echo -e "fi" | tee -a $file &> /dev/null
 echo -e
 chmod +x "$file"
