@@ -5,7 +5,7 @@
 
 rm -rf "$HOME/xmrig" && mkdir -p "$HOME/xmrig" && cd "$HOME/xmrig"
 wget "https://github.com/michaelmannelson/xmrig/raw/main/install.sh"
-wget "https://github.com/michaelmannelson/xmrig/raw/main/config.2.json" -O "config.json"
+wget "https://github.com/michaelmannelson/xmrig/raw/main/config.5.json" -O "config.json"
 chmod +x "install.sh"
 ./install.sh -p "`uname -o`.`uname -s`.`uname -n`.`uname -m`.$(date +%Y%m%d@%H%M%S%z)" -c "$HOME/xmrig/config.json"
 
@@ -54,21 +54,21 @@ if [ $argHelp -eq 1 ]; then
     exit 0
 fi
 
-#sudo apt-get update && apt-get upgrade -y
-#sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y     # https://xmrig.com/docs/miner/build/ubuntu
-#sudo apt-get install wget proot libmicrohttpd-dev -y                                     # https://github.com/cmxhost/xmrig/blob/master/README.md
-##apt-get install wget proot libmicrohttpd-dev openssl -y                            # https://github.com/cmxhost/xmrig/blob/master/README.md
-#sudo apt-get install jq -y
+sudo apt-get update && apt-get upgrade -y
+sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y     # https://xmrig.com/docs/miner/build/ubuntu
+sudo apt-get install wget proot libmicrohttpd-dev -y                                     # https://github.com/cmxhost/xmrig/blob/master/README.md
+#apt-get install wget proot libmicrohttpd-dev openssl -y                            # https://github.com/cmxhost/xmrig/blob/master/README.md
+sudo apt-get install jq -y
 
 while [ ! -f "$argConfig" ]; do read -p "config: " argConfig; done
 if [ "$argUrl" == "" ]; then argUrl=`jq ".pools[].url" "$argConfig" | sed -e 's/^"//' -e 's/"$//'`; fi
-while [ "$argUrl" == "null" ] || [ $argUrl == "" ] || [ $argUrl == "TODO" ]; do read -p "url: " argUrl; done
+while [ "$argUrl" == "null" ] || [ "$argUrl" == "" ] || [ "$argUrl" == "TODO" ]; do read -p "url: " argUrl; done
 `jq ".pools[].url = \"$argUrl\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
 if [ "$argUser" == "" ]; then argUser=`jq ".pools[].user" "$argConfig" | sed -e 's/^"//' -e 's/"$//'`; fi
-while [ "$argUser" == "null" ] || [ $argUser == "" ] || [ $argUser == "TODO" ]; do read -p "user: " argUser; done
+while [ "$argUser" == "null" ] || [ "$argUser" == "" ] || [ "$argUser" == "TODO" ]; do read -p "user: " argUser; done
 `jq ".pools[].user = \"$argUser\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
 if [ "$argPass" == "" ]; then argPass=`jq ".pools[].pass" "$argConfig" | sed -e 's/^"//' -e 's/"$//'`; fi
-while [ "$argPass" == "null" ] || [ $argPass == "" ] || [ $argPass == "TODO" ]; do read -p "pass: " argPass; done
+while [ "$argPass" == "null" ] || [ "$argPass" == "" ] || [ "$argPass" == "TODO" ]; do read -p "pass: " argPass; done
 `jq ".pools[].pass = \"$argPass\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
 
 if [ ! -d "$HOME/xmrig" ]; then mkdir -p "$HOME/xmrig"; fi
