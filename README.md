@@ -9,11 +9,11 @@ Step 2 - Get install script
 ```
 wget "https://github.com/michaelmannelson/xmrig/raw/main/install.sh"
 chmod +x "install.sh"
-
 ```
 
-Step 3 - Pick processing intensity level from least to greatest. 0 = Idle, 2 = Normal, 5 = Dedicated
+Step 3 - Pick desired processing intensity level from least to greatest. 0 = Idle, 2 = Normal, 5 = Dedicated
 ```
+
 wget "https://github.com/michaelmannelson/xmrig/raw/main/config.0.json" -O "config.json"
 
 wget "https://github.com/michaelmannelson/xmrig/raw/main/config.2.json" -O "config.json"
