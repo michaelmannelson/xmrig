@@ -54,8 +54,15 @@ fi
 
 if [ "`uname -o`" == "Android" ]; then # https://github.com/cmxhost/xmrig/blob/master/README.md
     apt-get update && apt-get upgrade -y
-    apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
-    apt-get install wget proot libmicrohttpd-dev -y
+    apt-get install git -y
+    apt-get install build-essential -y
+    apt-get install cmake -y
+    apt-get install libuv1-dev -y
+    apt-get install libssl-dev -y
+    apt-get install libhwloc-dev -y
+    apt-get install wget -y
+    apt-get install proot -y
+    apt-get install libmicrohttpd-dev -y
     apt-get install jq -y
 else # https://xmrig.com/docs/miner/build/ubuntu
     sudo apt-get update && apt-get upgrade -y
