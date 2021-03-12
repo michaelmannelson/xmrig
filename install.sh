@@ -70,7 +70,7 @@ while [ "$argPass" == "null" ] || [ "$argPass" == "" ] || [ "$argPass" == "TODO"
 
 if [ ! -d "$HOME/xmrig" ]; then mkdir -p "$HOME/xmrig"; fi
 
-if [ "`jq ".cuda" "$argConfig"`" == "true" ] && [ "`uname -o`" != "Android" ] && [ "`lspci | grep -i nvidia`" != "" ]; then
+if [ "`jq ".cuda.enabled" "$argConfig"`" == "true" ] && [ "`uname -o`" != "Android" ] && [ "`lspci | grep -i nvidia`" != "" ]; then
     #https://developer.nvidia.com/cuda-downloads
     wget "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin"
     sudo mv "cuda-ubuntu2004.pin" "/etc/apt/preferences.d/cuda-repository-pin-600"
