@@ -65,6 +65,7 @@ if [ "`uname -o`" == "Android" ]; then # https://github.com/cmxhost/xmrig/blob/m
     apt-get install libmicrohttpd-dev -y
     apt-get install openssl -y
     apt-get install jq -y
+    apt-get install cronie -y
 else # https://xmrig.com/docs/miner/build/ubuntu
     sudo apt-get update && apt-get upgrade -y
     sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
