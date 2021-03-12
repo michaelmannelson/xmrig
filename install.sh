@@ -2,11 +2,13 @@
 
 : '
 
+
 rm -rf "$HOME/xmrig" && mkdir -p "$HOME/xmrig" && cd "$HOME/xmrig"
 wget "https://github.com/michaelmannelson/xmrig/raw/main/install.sh"
-wget "https://github.com/michaelmannelson/xmrig/raw/main/config.json" -O "config.json"
+wget "https://github.com/michaelmannelson/xmrig/raw/main/config.5.json" -O "config.json"
 chmod +x "install.sh"
 ./install.sh -p "`uname -o`.`uname -s`.`uname -n`.`uname -m`.$(date +%Y%m%d@%H%M%S%z)" -c "$HOME/xmrig/config.json"
+
 
 '
 
@@ -59,16 +61,15 @@ fi
 #sudo apt-get install jq -y
 
 while [ ! -f "$argConfig" ]; do read -p "config: " argConfig; done
-
-if [ "$argUrl" == "" ]; then argUrl=`jq ".pools[].url" "$argConfig"`; fi
-while [ "$argUrl" == "" ] || [ "$argUrl" == "TODO" ]; do read -p "url: " argUrl; done
+if [ "$argUrl" == "" ]; then argUrl=`jq ".pools[].url" "$argConfig" | sed -e 's/^"//' -e 's/"$//'`; fi
+while [ "$argUrl" == "null" ] || [ $argUrl == "" ] || [ $argUrl == "TODO" ]; do read -p "url: " argUrl; done
 `jq ".pools[].url = \"$argUrl\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
-if [ "$argUser" == "" ]; then argUser=`jq ".pools[].user" "$argConfig"`; fi
-while [ "$argUser" == "" ] || [ "$argUser" == "TODO" ]; do read -p "user: " argUser; done
-`jq ".pools[].user = \"$argUser\"" "$argConfig" > "$argConfig.tmp"` && mv "$argConfig.tmp" "$argConfig"
-if [ "$argPass" == "" ]; then argPass=`jq ".pools[].pass" "$argConfig"`; fi
-while [ "$argPass" == "" ] || [ "$argPass" == "TODO" ]; do read -p "pass: " argPass; done
-`jq ".pools[].pass = \"$argPass\"" "$argConfig" > "$argConfig.tmp"` && mv "$argConfig.tmp" "$argConfig"
+if [ "$argUser" == "" ]; then argUser=`jq ".pools[].user" "$argConfig" | sed -e 's/^"//' -e 's/"$//'`; fi
+while [ "$argUser" == "null" ] || [ $argUser == "" ] || [ $argUser == "TODO" ]; do read -p "user: " argUser; done
+`jq ".pools[].user = \"$argUser\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
+if [ "$argPass" == "" ]; then argPass=`jq ".pools[].pass" "$argConfig" | sed -e 's/^"//' -e 's/"$//'`; fi
+while [ "$argPass" == "null" ] || [ $argPass == "" ] || [ $argPass == "TODO" ]; do read -p "pass: " argPass; done
+`jq ".pools[].pass = \"$argPass\"" "$argConfig" > "$argConfig.tmp"` && mv -f "$argConfig.tmp" "$argConfig"
 
 if [ ! -d "$HOME/xmrig" ]; then mkdir -p "$HOME/xmrig"; fi
 
@@ -111,8 +112,8 @@ file="$HOME/xmrig/run.sh"
 if [ ! -f $file ]; then install -Dv /dev/null "$file"; fi
 truncate -s 0 $file
 echo -e "#!/bin/bash" | tee -a $file &> /dev/null
-echo -e "if [ -z $(pidof -x xmrig) ]; then" | tee -a $file &> /dev/null
-echo -e "  $HOME/xmrig/build/xmrig --config \"$argConfig\"" | tee -a $file &> /dev/null
+echo -e "if [ -z \$(pidof -x xmrig) ]; then" | tee -a $file &> /dev/null
+echo -e "  \"$HOME/xmrig/xmrig/build/xmrig\" --config \"$argConfig\"" | tee -a $file &> /dev/null
 echo -e "fi" | tee -a $file &> /dev/null
 echo -e
 chmod +x "$file"
@@ -122,3 +123,4 @@ chmod +x "$file"
 #echo "5 * * * * \"$file\"" >> crontab_new
 #crontab crontab_new
 #rm crontab_new
+
