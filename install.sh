@@ -63,6 +63,7 @@ if [ "`uname -o`" == "Android" ]; then # https://github.com/cmxhost/xmrig/blob/m
     apt-get install wget -y
     apt-get install proot -y
     apt-get install libmicrohttpd-dev -y
+    apt-get install openssl -y
     apt-get install jq -y
 else # https://xmrig.com/docs/miner/build/ubuntu
     sudo apt-get update && apt-get upgrade -y
@@ -116,8 +117,8 @@ if   [ "`uname -m`" == "armv7l" ]; then cmaketarget="-DARM_TARGET=7";
 elif [ "`uname -m`" == "armv8l" ]; then cmaketarget="-DARM_TARGET=8";
 fi
 
-declare cmakeHwloc=""
-if [ "`uname -o`" == "Android" ]; then cmakeHwloc="-DWITH_HWLOC=OFF"; fi
+#declare cmakeHwloc=""
+#if [ "`uname -o`" == "Android" ]; then cmakeHwloc="-DWITH_HWLOC=OFF"; fi
 
 if [ -d "$HOME/xmrig/xmrig" ]; then rm -rf "$HOME/xmrig/xmrig"; fi
 cd "$HOME/xmrig" && git clone https://github.com/xmrig/xmrig.git
