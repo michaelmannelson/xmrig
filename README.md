@@ -28,6 +28,7 @@ Step 4 - Run the install script
 ```
 
 Step 5 - When prompted for url, paste in your favorite pool address.
+
 Step 6 - When prompted for user, put in whatever the pool requires for that, probably your public wallet address
 
 Step 7 - Run the generated run script
