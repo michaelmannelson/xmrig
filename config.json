@@ -1,0 +1,37 @@
+{
+  "autosave": true,
+  "background": false,
+  "cpu": {
+    "enabled": true,
+    "huge-pages": true,
+    "priority": 5,
+    "yield": true,
+    "max-threads-hint": 100,
+    "asm": true,
+  },
+  "cuda": {
+    "enabled": true,
+    "loader": null,
+    "nvml": true,
+    "cn/0": false,
+    "cn-lite/0": false
+  },  
+  "donate-level": 0,
+  "opencl": false,
+  "pause-on-battery": true,
+  "pause-on-active": true,
+  "pools": [
+    {
+      "url": "TODO",
+      "user": "TODO",
+      "pass": "TODO",
+      "keepalive": true,
+      "tls": true
+    }
+  ]  
+  "randomx": {
+    "mode": "auto",
+    "1gb-pages": true,
+  },  
+  "title": true,
+}
