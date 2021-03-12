@@ -65,7 +65,9 @@ if [ "`uname -o`" == "Android" ]; then # https://github.com/cmxhost/xmrig/blob/m
     apt-get install libmicrohttpd-dev -y
     apt-get install openssl -y
     apt-get install jq -y
-    apt-get install cronie -y
+    #https://www.reddit.com/r/termux/comments/i27szk/how_do_i_crontab_on_termux/
+    apt-get install cronie -y               
+    apt-get termux-services -y
 else # https://xmrig.com/docs/miner/build/ubuntu
     sudo apt-get update && apt-get upgrade -y
     sudo apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y
@@ -144,4 +146,12 @@ grep -v "xmrig" crontab_new > crontab_new_tmp && mv crontab_new_tmp crontab_new
 echo "*/5 * * * * \"$file\"" >> crontab_new
 crontab crontab_new
 rm crontab_new
-/etc/init.d/cron restart
+
+if [ "`uname -o`" == "Android" ]; then
+    echo "Termux must be restarted so manually re-execute this command when you return..."
+    sv enable crond
+    exit
+else
+    /etc/init.d/cron restart
+fi
+
