@@ -113,8 +113,8 @@ else
 fi
 
 declare cmakeTarget="" 
-if   [ "`uname -m`" == "armv7l" ]; then cmaketarget="-DARM_TARGET=7";
-elif [ "`uname -m`" == "armv8l" ]; then cmaketarget="-DARM_TARGET=8";
+if   [ "`uname -m`" == "armv7l" ]; then cmaketarget="-DARM_TARGET=7"; cmakeHwloc="-DWITH_HWLOC=OFF";
+elif [ "`uname -m`" == "armv8l" ]; then cmaketarget="-DARM_TARGET=8"; cmakeHwloc="-DWITH_HWLOC=OFF";
 fi
 
 #declare cmakeHwloc=""
