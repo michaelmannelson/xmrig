@@ -20,3 +20,4 @@ if [ -z $(pidof -x xmrig) ]; then
   echo "$pre started" >> "$log"
 fi
 
+
