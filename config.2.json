@@ -5,7 +5,7 @@
   "cpu": {
     "enabled": true,
     "huge-pages": true,
-    "priority": 0,
+    "priority": 2,
     "yield": true,
     "max-threads-hint": 45
   },
