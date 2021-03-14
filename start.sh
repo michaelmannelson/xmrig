@@ -5,6 +5,12 @@ declare -r date=$(date -u +"%Y%m%d%H%M%S%z")
 declare -r log="log.dat"
 declare -r pre="$date - $cwf - xmrig -"
 
+declare -r level=$1
+
+if   [ "$level" != "" ]; then 
+  cp -f "$HOME/xmrig/config.$level.json" "$HOME/xmrig/config.json"
+fi
+
 if [ -z $(pidof -x xmrig) ]; then
   crontab -l > crontab_new
   grep -v "xmrig" crontab_new > crontab_new_tmp && mv crontab_new_tmp crontab_new
